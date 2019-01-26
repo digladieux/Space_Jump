@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Space Jump</string>
+    <string name="start">Start</string>
+    <string name="earth">Earth</string>
+    <string name="moon">Moon</string>
+    <string name="mars">Mars</string>
+    <string name="sun">Sun</string>
+    <string name="attempt">Attempt </string>
+    <string name="reward0">Succeed to finish the first level</string>
+    <string name="reward1">Succeed to finish the second level</string>
+    <string name="reward2">Succeed to finish the third level</string>
+    <string name="reward3">Succeed to finish the fourth level</string>
+    <string name="reward4">Succeed to finish all the levels</string>
+    <string name="current_dress">Current dress of the sprite</string>
+    <string name="new_dress">New dress unlocked</string>
+    <string name="new_badge">New badge unlocked</string>
+    <string name="victory">VICTORY</string>
+    <string name="new_rewards">New Rewards</string>
+
+</resources>

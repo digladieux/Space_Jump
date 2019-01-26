@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background = "@drawable/background"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonEarth"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:background="@drawable/empty"
+        android:fontFamily="@font/shojumaru"
+        android:text="@string/earth"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMars"
+        app:layout_constraintEnd_toStartOf="@+id/buttonMoon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonMoon"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:background="@drawable/empty"
+        android:fontFamily="@font/shojumaru"
+        android:text="@string/moon"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSun"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonEarth"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonMars"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:background="@drawable/empty"
+        android:fontFamily="@font/shojumaru"
+        android:text="@string/mars"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSun"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEarth" />
+
+    <Button
+        android:id="@+id/buttonSun"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:background="@drawable/empty"
+        android:fontFamily="@font/shojumaru"
+        android:text="@string/sun"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonMars"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMoon" />
+
+    <Button
+        android:id="@+id/buttonReturn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="634dp"
+        android:layout_marginBottom="337dp"
+        android:background="@drawable/return_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background = "@drawable/background"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonReturn"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/return_arrow"
+        app:layout_constraintBottom_toTopOf="@+id/imageNewDress"
+        app:layout_constraintEnd_toStartOf="@+id/buttonRetry"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textVictory" />
+
+    <Button
+        android:id="@+id/buttonRetry"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/retry"
+        app:layout_constraintBottom_toTopOf="@+id/imageNewDress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonReturn"
+        app:layout_constraintTop_toBottomOf="@+id/textVictory" />
+
+    <ImageView
+        android:id="@+id/imageNewDress"
+        android:layout_width="77dp"
+        android:layout_height="117dp"
+        android:layout_marginStart="100dp"
+        android:contentDescription="@string/new_dress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageNewBadge"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonReturn" />
+
+    <ImageView
+        android:id="@+id/imageNewBadge"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="100dp"
+        android:contentDescription="@string/new_badge"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageNewDress"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRetry" />
+
+    <TextView
+        android:id="@+id/textVictory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/shojumaru"
+        android:text="@string/victory"
+        android:textColor="@android:color/white"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRetry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageNewRewards"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/new_rewards"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/new_rewards" />
+
+    <TextView
+        android:id="@+id/textNewRewards"
+        android:layout_width="85dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/shojumaru"
+        android:text="@string/new_rewards"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageNewRewards"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageNewRewards"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
