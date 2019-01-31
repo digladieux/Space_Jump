@@ -1,7 +1,10 @@
 package com.example.dimitri.spacejump.Activity;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +29,7 @@ public class MapActivity extends Activity {
                 startActivity(intent);
             }
         });
+
 
         buttonsMaps = new Button[4];
 
@@ -64,5 +68,6 @@ public class MapActivity extends Activity {
                 startActivity(intent);
             }
         });
+
     }
 }

@@ -16,10 +16,10 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-        <activity android:name=".Activity.DressActivity"/>
-        <activity android:name=".Activity.MapActivity"/>
-        <activity android:name=".Activity.RewardsActivity"/>
-        <activity android:name=".Activity.WinActivity"/>
-        <activity android:name=".Activity.GameActivity"/>
+        <activity android:name=".Activity.DressActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".Activity.MapActivity" android:screenOrientation="landscape" />
+        <activity android:name=".Activity.RewardsActivity" android:screenOrientation="landscape" />
+        <activity android:name=".Activity.WinActivity" android:screenOrientation="landscape" />
+        <activity android:name=".Activity.GameActivity" android:screenOrientation="landscape" />
     </application>
 </manifest>

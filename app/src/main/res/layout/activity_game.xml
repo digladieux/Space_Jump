@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background = "@drawable/background_game"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_game"
+    android:orientation="horizontal"
+    tools:layout_editor_absoluteY="25dp">
 
     <Button
-        android:id="@+id/buttonReturnMenu"
+        android:id="@+id/buttonReturn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="634dp"
-        android:layout_marginBottom="337dp"
+        android:layout_marginBottom="309dp"
         android:background="@drawable/return_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,15 +33,34 @@
 
     <TextView
         android:id="@+id/textAttempt"
-        android:layout_width="132dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="376dp"
+        android:layout_marginBottom="5dp"
         android:fontFamily="@font/shojumaru"
         android:text="@string/attempt"
         android:textAlignment="textStart"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageAttempt"
-        app:layout_constraintEnd_toEndOf="@+id/imageAttempt"
-        app:layout_constraintStart_toStartOf="@+id/imageAttempt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonReturn"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageAttempt" />
+
+    <ImageView
+        android:id="@+id/imageAlienSprite"
+        android:layout_width="75dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="50dp"
+        android:contentDescription="@string/alien_sprite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageAttempt" />
 
 </android.support.constraint.ConstraintLayout>
