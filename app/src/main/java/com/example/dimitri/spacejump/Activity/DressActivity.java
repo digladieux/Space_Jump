@@ -9,12 +9,17 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.dimitri.spacejump.R;
+
+import static com.example.dimitri.spacejump.Constants.ConstantsGame.currentDress;
+import static com.example.dimitri.spacejump.Constants.ConstantsGame.mapAvailable;
 
 public class DressActivity extends Activity {
 
@@ -23,14 +28,12 @@ public class DressActivity extends Activity {
     Button buttonPreviousDress;
     ImageView imageViewCurrentDress;
 
-    int currentDress ; /* todo : var static dans alien apres */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE) ;
         setContentView(R.layout.activity_dress);
-
-        currentDress = 0 ;
 
         imageViewCurrentDress = findViewById(R.id.imageCurrentDress) ;
         displayCurrentDress();
@@ -48,13 +51,13 @@ public class DressActivity extends Activity {
         buttonNextDress.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if (currentDress == 4)
+                if ( (currentDress == 4) || (mapAvailable <= currentDress))
                 {
                     currentDress = 0 ;
                 }
                 else
                 {
-                    currentDress ++ ; /* todo : si = map available => 0 */
+                    currentDress ++ ;
                 }
                 displayCurrentDress();
             }
@@ -65,11 +68,11 @@ public class DressActivity extends Activity {
             public void onClick(View view) {
                 if (currentDress == 0)
                 {
-                    currentDress = 4 ;
+                    currentDress = mapAvailable;
                 }
                 else
                 {
-                    currentDress -- ; /* todo : si = 0 => map available  */
+                    currentDress -- ;
                 }
                 displayCurrentDress();
             }

@@ -20,6 +20,6 @@
         <activity android:name=".Activity.MapActivity" android:screenOrientation="landscape" />
         <activity android:name=".Activity.RewardsActivity" android:screenOrientation="landscape" />
         <activity android:name=".Activity.WinActivity" android:screenOrientation="landscape" />
-        <activity android:name=".Activity.GameActivity" android:screenOrientation="landscape" />
+        <activity android:name=".Activity.Game.GameActivity" android:screenOrientation="landscape" />
     </application>
 </manifest>
