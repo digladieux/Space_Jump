@@ -2,12 +2,9 @@ package com.example.dimitri.spacejump.Constants;
 
 public class ConstantsBatObstacle {
 
-    public static final int OBSTACLE_HEIGHT = (Constants.SCREEN_HEIGHT / 1080) * 117;
-    public static final int OBSTACLE_WIDTH = (Constants.SCREEN_WIDTH / 1794) * 175;
-    //public static final int OBSTACLE_RIGHT = Constants.SCREEN_WIDTH + OBSTACLE_WIDTH;
-    //public static final int OBSTACLE_LEFT = Constants.SCREEN_WIDTH;
-    private static final int OBSTACLE_GAP_TOP = 400;
-    public static final int OBSTACLE_TOP = OBSTACLE_GAP_TOP;
-    public static final int OBSTACLE_BOTTOM = OBSTACLE_HEIGHT + OBSTACLE_GAP_TOP;
+    public static final int OBSTACLE_WIDTH = (int)((Constants.SCREEN_WIDTH * 1.0 /1794) * 175); /* Largeur de l'obstacle */
+    public static final int OBSTACLE_HEIGHT = (int)((Constants.SCREEN_HEIGHT * 1.0 /1080) * 117); /* Hauteur de l'obstacle */
+    private static final int OBSTACLE_GAP_TOP = (int)((Constants.SCREEN_HEIGHT * 1.0 /1080) * 400); /* Distance entre le haut de l'ecran et un obstacle */
+    public static final int OBSTACLE_TOP = OBSTACLE_GAP_TOP; /* Haut de la hitbox de l'obstacle en coordonne y */
 
 }

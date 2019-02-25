@@ -6,14 +6,18 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 
-import com.example.dimitri.spacejump.Animation.Animation;
-import com.example.dimitri.spacejump.Animation.AnimationManager;
+import com.example.dimitri.spacejump.Entities.Animation.Animation;
+import com.example.dimitri.spacejump.Entities.Animation.AnimationManager;
 import com.example.dimitri.spacejump.Constants.PlayerConstants;
+import com.example.dimitri.spacejump.Exception.InvalidCurrentDress;
 import com.example.dimitri.spacejump.R;
 
 import static com.example.dimitri.spacejump.Constants.ConstantsGame.currentDress;
 import static com.example.dimitri.spacejump.StaticMethod.createPicture;
 
+/**
+ * Classe representant le joueur
+ */
 public class AlienSprite {
 
     /**
@@ -38,12 +42,11 @@ public class AlienSprite {
     private double currentSpeed;
 
     /**
-     * Contructeur du personnage, on initialise tous les attributs a partir des constantes du fichier Constants.java, et on ajoute les animations
-     * @param context Contexte actuel du programme
-     * @param rectangle Zone occupee par le personnage
+     * Contructeur de la classe AlienSprite
+     * @param context Activity actuellement en cours
+     * @param rectangle Hitbox du personnage
      */
-    public AlienSprite(Context context, Rect rectangle)
-    {
+    public AlienSprite(Context context, Rect rectangle) throws InvalidCurrentDress {
         this.rectangle = rectangle ;
         this.velocity = PlayerConstants.VELOCITY;
         this.initSpeed = PlayerConstants.SPEED;
@@ -53,12 +56,11 @@ public class AlienSprite {
     }
 
     /**
-     * Fonction initialisant toutes les animations du personnage, pour chacunes des tenues. Chaque tenue possede 2 animations de marche, une de saut et une de collision.
+     * Fonction initialisant toutes les images du personnage suivant sa tenue. Une tenue possede 1 animations de marche, 1 image de saut et une de gravite.
      * Une fois que toutes les animations sont bien dimensionnees, elles sont creees et integrees a animationManager.
-     * @param context Context actuel du programme
+     * @param context Activity actuellement en cours
      */
-    private void initialisationAnimationSprite(Context context)
-    {
+    private void initialisationAnimationSprite(Context context) throws InvalidCurrentDress {
         Bitmap scaledWalk1, scaledWalk2, scaledJump, scaledGravity ;
         switch(currentDress)
         {
@@ -93,7 +95,7 @@ public class AlienSprite {
                 scaledGravity= createPicture(context, R.drawable.aliengreen_hurt, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
                 break ;
                 default:
-                    throw new IllegalArgumentException() ;
+                    throw new InvalidCurrentDress() ;
         }
 
         Animation animJump = new Animation(new Bitmap[]{scaledJump}, 2);
@@ -103,8 +105,8 @@ public class AlienSprite {
     }
 
     /**
-     *
-     * @return
+     * Getteur sur la zone occupe par le persionnage
+     * @return Hitbox du personnage
      */
     public Rect getRectangle() {
         return rectangle;
@@ -112,8 +114,8 @@ public class AlienSprite {
 
 
     /**
-     * Fonction permettant de recuperer les coordonnees du rectangle du personnage
-     * @return Rectangle representant l'objet
+     * Getteur sur la vitesse actuelle du personnage
+     * @return Vitesse actuelle du personnage
      */
     public double getCurrentSpeed() {
         return currentSpeed;
@@ -121,7 +123,7 @@ public class AlienSprite {
 
 
     /**
-     *
+     * Remet a la vitesse actuelle a la vitesse intiale
      */
     public void resetCurrentSpeed()
     {
@@ -129,7 +131,7 @@ public class AlienSprite {
     }
 
     /**
-     *
+     * Increment la vitesse actuelle de la valeur de l'accelation du personnage
      */
     public void incrementCurrentSpeed()
     {
@@ -137,29 +139,29 @@ public class AlienSprite {
     }
 
     /**
-     *
-     * @param canvas
+     * Dessine le personnage a l'ecran
+     * @param canvas Zone de dessin ou on souhaite faire apparaitre l'image
      */
     public void draw(Canvas canvas) {
         animationManager.draw(canvas, rectangle);
     }
 
     /**
-     *
-     * @param point
+     * Mise a jour de la position du personnage, ainsi que son animation
+     * @param point Coordonnee du centre de la hitbox du personnage
      */
     public void update(Point point)
     {
-        float oldTop = rectangle.top; /* est ton aller a gauche ou pas */
+        float oldTop = rectangle.top;
         rectangle.set(point.x - rectangle.width()/2, point.y - rectangle.height()/2,point.x + rectangle.width()/2, point.y + rectangle.height()/2);
         animationManager.playAnim(giveStateSprite(oldTop));
         animationManager.update();
     }
 
     /**
-     *
-     * @param oldTop
-     * @return
+     * Donne l'etat actuel du personnage (en saut, marche, retombe au sol)
+     * @param oldTop Coordonnee y du centre de la hitbox du personnage avant le update
+     * @return L'animation a faire pour le personnage
      */
     private int giveStateSprite(float oldTop)
     {

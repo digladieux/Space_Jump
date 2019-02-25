@@ -11,20 +11,45 @@ import android.widget.TextView;
 
 import com.example.dimitri.spacejump.R;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static com.example.dimitri.spacejump.Constants.ConstantsGame.mapAvailable;
 
+/**
+ * Activity pour l'affichage des récompenses
+ */
 public class RewardsActivity extends Activity {
 
+    /**
+     * Logger pour afficher les differents evenements systeme lors de l'execution de l'application
+     */
+    private static final Logger logger = Logger.getLogger("RewardsActivity") ;
+
+    /**
+     * Texte qui indique comment la recompense a ete obtenue
+     */
     TextView textViewRewards ;
+    /**
+     * Boutton pour le retour a l'activite precedente (MainActivity)
+     */
     Button buttonPreviousActivity;
+    /**
+     * Liste de toutes les recompenses
+     */
     Button[] buttonsBadges;
 
+    /**
+     * Methode appelle a la creation de l'activit
+     * @param savedInstanceState null si c'est la premiere fois que l'application se cree, sinon contient la nouvelle orientation du jeu (paysage ou portrait)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE) ;
-        setContentView(R.layout.activity_rewards);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); /* On veut afficher l'application sur tout l'ecran */
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE) ; /* On ne souhaite pas afficher le nom de l'application en haut de l'ecran */
+        setContentView(R.layout.activity_rewards); /* Setter sur le choix de la disposition des objets a l'ecran */
+        logger.log(Level.INFO, "CreationRewardsActivty");
 
         textViewRewards = findViewById(R.id.textRewards) ;
 
@@ -39,70 +64,29 @@ public class RewardsActivity extends Activity {
 
         buttonsBadges = new Button[5];
 
-        if (mapAvailable >= 1)
-        {
-            buttonsBadges[0] = findViewById(R.id.buttonBadgeBlue);
-            buttonsBadges[0].setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    displayRewards(R.string.reward0);
-                }
-            });
-            buttonsBadges[0].setVisibility(View.VISIBLE);
-        }
-        if (mapAvailable >= 2)
-        {
-            buttonsBadges[1] = findViewById(R.id.buttonBadgeBeige);
-            buttonsBadges[1].setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    displayRewards(R.string.reward1);
-                }
-            });
-            textViewRewards.setVisibility(View.VISIBLE);
-        }
-        if (mapAvailable >= 3)
-        {
-            buttonsBadges[2] = findViewById(R.id.buttonBadgePink);
-            buttonsBadges[2].setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    displayRewards(R.string.reward2);
-                }
-            });
-
-            buttonsBadges[2].setVisibility(View.VISIBLE);
-        }
-        if (mapAvailable >= 4)
-        {
-            buttonsBadges[3] = findViewById(R.id.buttonBadgeYellow);
-            buttonsBadges[3].setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    displayRewards(R.string.reward3);
-                }
-            });
-            buttonsBadges[3].setVisibility(View.VISIBLE);
-        }
-        if (mapAvailable >= 5)
-        {
-            buttonsBadges[4] = findViewById(R.id.buttonBadgeGreen);
-            buttonsBadges[4].setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    displayRewards(R.string.reward4);
-                }
-            });
-            buttonsBadges[4].setVisibility(View.VISIBLE);
-        }
-
-
+        displayRewardsIfAvailable(0, R.string.reward0 );
+        displayRewardsIfAvailable(1, R.string.reward1 );
+        displayRewardsIfAvailable(2, R.string.reward2 );
+        displayRewardsIfAvailable(3, R.string.reward3 );
+        displayRewardsIfAvailable(4, R.string.reward4 );
     }
 
-    private void displayRewards(int text)
+
+    private void displayRewardsIfAvailable(final int i, final int text)
     {
-        textViewRewards.setText(text);
-        textViewRewards.setVisibility(View.VISIBLE);
+        if (mapAvailable >= i+1)
+        {
+            buttonsBadges[i] = findViewById(R.id.buttonBadgeBlue);
+            buttonsBadges[i].setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    logger.log(Level.INFO, "ClickOnReward");
+                    textViewRewards.setText(text);
+                    textViewRewards.setVisibility(View.VISIBLE);
+                }
+            });
+            buttonsBadges[i].setVisibility(View.VISIBLE);
+        }
 
     }
 

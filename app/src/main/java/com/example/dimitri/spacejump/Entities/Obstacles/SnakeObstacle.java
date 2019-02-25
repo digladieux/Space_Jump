@@ -10,18 +10,33 @@ import com.example.dimitri.spacejump.R;
 
 import static com.example.dimitri.spacejump.StaticMethod.createPicture;
 
+/**
+ * Classe representant un obstacle terrien de type serpent
+ */
 public class SnakeObstacle extends Obstacle {
 
-    private SnakeObstacle(Bitmap movement_right, Bitmap movement_left, int area_left) {
-        super(movement_right, movement_left, area_left, ConstantsSnakeObstacle.OBSTACLE_TOP, area_left + ConstantsSnakeObstacle.OBSTACLE_WIDTH, ConstantsSnakeObstacle.OBSTACLE_BOTTOM);
+    /**
+     * Constructeur de la classe
+     * @param movementRight 1ere image de l'animation de deplacement de l'obstacle
+     * @param movementLeft 2ème image de l'animation de deplacement de l'obstacle
+     * @param areaCenter Centre de la hitbox en coordonne y
+     */
+    private SnakeObstacle(Bitmap movementRight, Bitmap movementLeft, int areaCenter) {
+        super(movementRight, movementLeft, areaCenter - ConstantsSnakeObstacle.OBSTACLE_WIDTH/2, ConstantsSnakeObstacle.OBSTACLE_TOP, areaCenter + ConstantsSnakeObstacle.OBSTACLE_WIDTH/2, ConstantsSnakeObstacle.OBSTACLE_BOTTOM);
     }
 
-    public static Obstacle initialisationSnakeObstacle(Context context, double area_left) {
+    /**
+     * Fonction qui intialise un obstacle terrien
+     * @param context Activity actuellement en cours
+     * @param areaCenter Centre de la hitbox en coordonne y
+     * @return Un obstacle de piece
+     */
+    public static Obstacle initialisationSnakeObstacle(Context context, double areaCenter) {
         Bitmap scaledMovementLeft = createPicture(context, R.drawable.snake_slime, ConstantsSnakeObstacle.OBSTACLE_WIDTH, ConstantsSnakeObstacle.OBSTACLE_HEIGHT);
         Matrix m = new Matrix();
-        m.preScale(-1, 1); /* Permet de definir la "taille de l'image" [-1 ; 1 ] */
+        m.preScale(-1, 1); /* Permet de definir la futur image en mirroir verticale */
         Bitmap scaledMovementRight = Bitmap.createBitmap(scaledMovementLeft, 0, 0, scaledMovementLeft.getWidth(), scaledMovementLeft.getHeight(), m, false);
-        return new SnakeObstacle(scaledMovementLeft, scaledMovementRight, (int)(area_left * Constants.SCREEN_WIDTH));
+        return new SnakeObstacle(scaledMovementLeft, scaledMovementRight, (int)(areaCenter * Constants.SCREEN_WIDTH));
     }
 }
 

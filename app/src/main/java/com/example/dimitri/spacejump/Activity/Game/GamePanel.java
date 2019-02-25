@@ -7,52 +7,49 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 /**
- *
+ * Layout du jeu. Remplace les activity_xxx.xml des autres Activity
  */
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     /**
-     *
+     * Gaming Loop de notre jeu
      */
     private MainThread thread ;
     /**
-     *
+     * Le layout du jeu
      */
     private final GameScene manager;
 
     /**
-     *
-     * @param context Activite en cours (Game ici)
+     * Constructeur de la classe GamePanel
+     * @param context Activity actuellement en cours
      */
     public GamePanel(Context context) /*Context : L'etat a l'intant t du telephone. On peut allumer bluetooth, la camera */
     {
         super(context) ;
 
 
-        /* getHolder : recupere la surface */
-        /* addCallBack : On regarde si il y a eu des nouveaux events */
-        getHolder().addCallback(this);
+        getHolder().addCallback(this); /* On recupere sur la surface les evenements quand ils se declencheront */
         thread = new MainThread(getHolder(), this) ;
         manager = new GameScene(context) ;
-        /* Focus du "curseur" sur la fenetre de GamePanel */
         setFocusable(true);
     }
 
     /**
-     *
-     * @param holder Surface ou se deroule le jeu
-     * @param format Format
-     * @param width Largeur de l'ecran
-     * @param height Hauteur de l'ecran
+     * Cette methode est appelle lorsqu'un changement structurel en format ou taille est effectue. Ici cette methode ne nous sert pas.
+     * @param holder Le SurfaceHolder ou la surface a change
+     * @param format Le nouveau format de pixel de la surface
+     * @param width Nouvelle Largeur de la surface
+     * @param height Nouvelle hauteur de la surface
      */
-    @Override /* Permet de dire que cette fonction va heriter */
+    @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) /* methode virtuel */
     {
 
     }
 
     /**
-     *
-     * @param holder Surface ou se deroule le jeu
+     * Cette methode est appelle avant la creation de la surface. On va lancer le thread qui permet de lancer le jeu
+     * @param holder Le SurfaceHolder ou la surface a ete cree
      */
     @Override
     public void surfaceCreated(SurfaceHolder holder)
@@ -63,14 +60,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     /**
-     *
-     * @param holder Surface ou se deroule le jeu
+     * Cette methode est appelle avant que la surface soit detruite. Il faut donc arreter le thread principale contenant notre jeu pour qu'il ne continue pas de tourner en arriere plan des autres activity
+     * @param holder Le SurfaceHolder ou la surface a ete detruite
      */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder)
     {
-        boolean retry = true ; /* Essaie de fermer le jeu plusieurs fois */
-        while(retry) /* On tente de le fermer plusieurs fois car cela peut planter defois */
+        boolean retry = true ; /* Essaie de fermer (peut ne pas marcher du premier coup, d'ou l'utilisation d'un while*/
+        while(retry)
         {
             try {
                 thread.setRunning(false) ; /* Arrete le jeu */
@@ -80,7 +77,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             catch (Exception e)
             {
                 e.printStackTrace();
-            }  /* Retourne sur la sortie d'erreur standard, la trace (log) des exception */
+            }
             retry = false ;
         }
 

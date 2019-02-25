@@ -9,43 +9,27 @@ import com.example.dimitri.spacejump.R;
 import static com.example.dimitri.spacejump.StaticMethod.createPicture;
 
 /**
- *
+ * Classe representant un obstacle terrien de type sol
  */
 public class GroundObstacle extends Obstacle {
     /**
-     *
-     * @param idle Image du personnage sans deplacement
-     * @param area_left Zone de l'obstacle a gauche
+     * Constructeur de la classe
+     * @param idle Image de repos du personnage
+     * @param areaCenter Centre de la hitbox en coordonne y
      */
-    private GroundObstacle(Bitmap idle, int area_left)
+    private GroundObstacle(Bitmap idle, int areaCenter)
     {
-        super(idle, area_left * ConstantsGroundObstacle.OBSTACLE_WIDTH,area_left * ConstantsGroundObstacle.OBSTACLE_WIDTH + ConstantsGroundObstacle.OBSTACLE_WIDTH, ConstantsGroundObstacle.OBSTACLE_TOP, ConstantsGroundObstacle.OBSTACLE_BOTTOM);
+        super(idle, areaCenter * ConstantsGroundObstacle.OBSTACLE_WIDTH - ConstantsGroundObstacle.OBSTACLE_WIDTH/2,areaCenter * ConstantsGroundObstacle.OBSTACLE_WIDTH + ConstantsGroundObstacle.OBSTACLE_WIDTH/2, ConstantsGroundObstacle.OBSTACLE_TOP, ConstantsGroundObstacle.OBSTACLE_BOTTOM);
     }
 
     /**
-     *
-     * @param context
-     * @param area_left
-     * @return
+     * Fonction qui intialise un obstacle suivant une coordonnee precise en y
+     * @param context Activity actuellement en cours
+     * @param areaCenter Centre de la hitbox en coordonne y
+     * @return Un obstacle de type sol
      */
-    public static Obstacle initialisationGroundObstacle(Context context, int area_left) {
+    public static Obstacle initialisationGroundObstacle(Context context, int areaCenter) {
         Bitmap scaledIdle = createPicture(context, R.drawable.grass_block, ConstantsGroundObstacle.OBSTACLE_WIDTH, ConstantsGroundObstacle.OBSTACLE_HEIGHT);
-        return new GroundObstacle(scaledIdle, area_left);
-    }
-
-    /**
-     * Collision entre un joueur et un obstacle
-     * @param player Notre joueur
-     * @return true si collision, false sinon
-     */
-    @Override
-    public int playerCollide(AlienSprite player) {
-        boolean collide = player.getRectangle().bottom > areaObstacle.top;
-        int codeCollision = 0 ;
-        if (collide)
-        {
-            codeCollision = 1 ;
-        }
-        return  codeCollision ;
+        return new GroundObstacle(scaledIdle, areaCenter);
     }
 }

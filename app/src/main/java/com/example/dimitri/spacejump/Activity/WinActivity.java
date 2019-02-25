@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,55 +14,128 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dimitri.spacejump.Activity.Game.GameActivity;
+import com.example.dimitri.spacejump.Exception.InvalidCurrentDress;
 import com.example.dimitri.spacejump.R;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static com.example.dimitri.spacejump.Constants.ConstantsGame.currentMap;
 import static com.example.dimitri.spacejump.Constants.ConstantsGame.mapAvailable;
+import static com.example.dimitri.spacejump.StaticMethod.resetMusic;
 
+/**
+ * Activity pour l'ecran de victoire d'un niveau
+ */
 public class WinActivity extends Activity {
-    Button buttonRetry;
+
+    /**
+     * Logger pour afficher les differents evenements systeme lors de l'execution de l'application
+     */
+    private static final Logger logger = Logger.getLogger("DressActivity") ;
+
+    /**
+     * Boutton pour le retour a l'activite precedente (GameActivity)
+     */
+    Button buttonPreviousActivity;
+
+    /**
+     * Musique de victoire
+     */
+    MediaPlayer musicWin ;
+
+    /**
+     * Boutton pour le retour a l'activite du choix des cartes (MapActivity)
+     */
     Button buttonReturnMap;
+
+    /**
+     * Image qui s'affiche si le joueur a gagne de nouvelles recompenses
+     */
     ImageView imageViewNewRewards;
+
+    /**
+     * Image qui s'affiche si le joueur a gagne une nouvelle tenue
+     */
     ImageView imageViewNewDress;
+
+    /**
+     * Image qui s'affiche si le joueur a gagne un nouveau badge
+     */
     ImageView imageViewNewBadge;
+
+    /**
+     * Texte qui s'affiche si le joueur a gagne de nouvelles recompenses
+     */
     TextView textViewNewRewards;
+
+    /**
+     * Texte pour indiquer la victoire du joueur
+     */
     TextView textViewVictory;
 
+    /**
+     * Methode appelle a la creation de l'activite
+     * @param savedInstanceState null si c'est la premiere fois que l'application se cree, sinon contient la nouvelle orientation du jeu (paysage ou portrait)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE) ;
-        setContentView(R.layout.activity_win);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); /* On veut afficher l'application sur tout l'ecran */
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE) ; /* On ne souhaite pas afficher le nom de l'application en haut de l'ecran */
+        setContentView(R.layout.activity_win); /* Setter sur le choix de la disposition des objets a l'ecran */
+        logger.log(Level.INFO, "CreationWinActivty");
 
-        buttonRetry = findViewById(R.id.buttonRetry);
-        buttonRetry.setOnClickListener(new View.OnClickListener(){
+        musicWin = MediaPlayer.create(getApplicationContext(), R.raw.winningsong);
+        musicWin.start();
+        buttonPreviousActivity = findViewById(R.id.buttonRetry);
+        buttonPreviousActivity.setOnClickListener(new View.OnClickListener(){
+            /**
+             * Methode qui se declenche lors d'un clique. Permet de passer de l'activite WinActivity a la GameActivity
+             * @param view Interface utilisateur pour la manipulation du composant boutton
+             */
             @Override
             public void onClick(View view) {
+                logger.log(Level.INFO, "ChangeActivity");
                 Intent intent = new Intent(WinActivity.this, GameActivity.class);
+                resetMusic(musicWin);
                 startActivity(intent);
             }
         });
 
         buttonReturnMap = findViewById(R.id.buttonReturn);
         buttonReturnMap.setOnClickListener(new View.OnClickListener(){
+            /**
+             * Methode qui se declenche lors d'un clique. Permet de passer de l'activite WinActivity a la MapActivity
+             * @param view Interface utilisateur pour la manipulation du composant boutton
+             */
             @Override
             public void onClick(View view) {
+                logger.log(Level.INFO, "ChangeActivity");
                 Intent intent = new Intent(WinActivity.this, MapActivity.class);
+                resetMusic(musicWin);
                 startActivity(intent);
             }
         });
         textViewVictory= findViewById(R.id.textVictory) ;
         if (mapAvailable == currentMap)
         {
-            displayNewRewards();
+            logger.log(Level.INFO, "NewRewards");
+            try {
+                displayNewRewards();
+            } catch (InvalidCurrentDress invalidCurrentDress) {
+                logger.log(Level.SEVERE, "InvalidCurrentDress");
+            }
         }
 
     }
-    private void displayNewRewards()
-    {
+
+    /**
+     * Cette methode se declenche si on a debloque un nouveau niveau
+     */
+    private void displayNewRewards() throws InvalidCurrentDress {
         mapAvailable ++ ;
-        SharedPreferences.Editor edit = getSharedPreferences("MapAvailable", Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor edit = getSharedPreferences("MapAvailable", Context.MODE_PRIVATE).edit(); /* On ouvre un fichier en mode ecriture pour mettre a jour le nombre de niveau debloque */
         edit.putInt("map", mapAvailable) ;
         edit.apply();
 
@@ -71,6 +145,7 @@ public class WinActivity extends Activity {
         textViewNewRewards = findViewById(R.id.textNewRewards) ;
         imageViewNewRewards = findViewById(R.id.imageNewRewards) ;
 
+        imageViewNewRewards.setImageResource(R.drawable.new_rewards);
         textViewNewRewards .setVisibility(View.VISIBLE);
         imageViewNewRewards.setVisibility(View.VISIBLE);
 
@@ -99,7 +174,7 @@ public class WinActivity extends Activity {
             case 4:
                 break ;
             default:
-                throw new IllegalArgumentException() ;
+                throw new InvalidCurrentDress() ;
         }
         imageViewNewBadge .setVisibility(View.VISIBLE);
         imageViewNewDress.setVisibility(View.VISIBLE);
