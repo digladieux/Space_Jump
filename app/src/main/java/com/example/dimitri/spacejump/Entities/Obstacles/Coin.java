@@ -25,8 +25,8 @@ public class Coin extends Obstacle {
      * @return Un obstacle de piece
      */
     public static Obstacle initialisationCoin(Context context, double areaCenter) {
-        Bitmap scaledMovementLeft = createPicture(context, R.drawable.bat, ConstantsCoin.OBSTACLE_WIDTH, ConstantsCoin.OBSTACLE_HEIGHT);
-        Bitmap scaledMovementRight = createPicture(context, R.drawable.bat_fly, ConstantsCoin.OBSTACLE_WIDTH, ConstantsCoin.OBSTACLE_HEIGHT);
+        Bitmap scaledMovementLeft = createPicture(context, R.drawable.coin, ConstantsCoin.OBSTACLE_WIDTH, ConstantsCoin.OBSTACLE_HEIGHT);
+        Bitmap scaledMovementRight = createPicture(context, R.drawable.coin, ConstantsCoin.OBSTACLE_WIDTH, ConstantsCoin.OBSTACLE_HEIGHT);
         return new Coin(scaledMovementLeft, scaledMovementRight, (int)(areaCenter * Constants.SCREEN_WIDTH), ConstantsCoin.OBSTACLE_TOP);
     }
 
@@ -38,8 +38,8 @@ public class Coin extends Obstacle {
      * @return Un obstacle de type chauve souris
      */
     public static Obstacle initialisationCoin(Context context, int areaCenter, int areaTop) {
-        Bitmap scaledMovementLeft = createPicture(context, R.drawable.bat, ConstantsCoin.OBSTACLE_WIDTH, ConstantsCoin.OBSTACLE_HEIGHT);
-        Bitmap scaledMovementRight = createPicture(context, R.drawable.bat_fly, ConstantsCoin.OBSTACLE_WIDTH, ConstantsCoin.OBSTACLE_HEIGHT);
+        Bitmap scaledMovementLeft = createPicture(context, R.drawable.coin, ConstantsCoin.OBSTACLE_WIDTH, ConstantsCoin.OBSTACLE_HEIGHT);
+        Bitmap scaledMovementRight = createPicture(context, R.drawable.coin, ConstantsCoin.OBSTACLE_WIDTH, ConstantsCoin.OBSTACLE_HEIGHT);
         return new Coin(scaledMovementLeft, scaledMovementRight, areaCenter, areaTop);
     }
 

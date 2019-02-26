@@ -93,6 +93,31 @@ public class AlienSprite {
                 scaledWalk2 = createPicture(context, R.drawable.aliengreen_walk2, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
                 scaledJump= createPicture(context, R.drawable.aliengreen_jump, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
                 scaledGravity= createPicture(context, R.drawable.aliengreen_hurt, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
+                break;
+
+            case 5 :
+                scaledWalk1 = createPicture(context, R.drawable.shipblue, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
+                scaledWalk2 = scaledJump = scaledGravity = scaledWalk1 ;
+                break ;
+
+            case 6 :
+                scaledWalk1 = createPicture(context, R.drawable.shipbeige, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
+                scaledWalk2 = scaledJump = scaledGravity = scaledWalk1 ;
+                break ;
+
+            case 7 :
+                scaledWalk1 = createPicture(context, R.drawable.shippink, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
+                scaledWalk2 = scaledJump = scaledGravity = scaledWalk1 ;
+                break ;
+
+            case 8 :
+                scaledWalk1 = createPicture(context, R.drawable.shipyellow, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
+                scaledWalk2 = scaledJump = scaledGravity = scaledWalk1 ;
+                break;
+            case 9 :
+                scaledWalk1 = createPicture(context, R.drawable.shipgreen, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
+                scaledWalk2 = scaledJump = scaledGravity = scaledWalk1 ;
+
                 break ;
                 default:
                     throw new InvalidCurrentDress() ;

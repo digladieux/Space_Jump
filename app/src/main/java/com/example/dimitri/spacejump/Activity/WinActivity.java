@@ -1,9 +1,7 @@
 package com.example.dimitri.spacejump.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +21,7 @@ import java.util.logging.Logger;
 import static com.example.dimitri.spacejump.Constants.ConstantsGame.currentMap;
 import static com.example.dimitri.spacejump.Constants.ConstantsGame.mapAvailable;
 import static com.example.dimitri.spacejump.StaticMethod.resetMusic;
+import static com.example.dimitri.spacejump.StaticMethod.writeFile;
 
 /**
  * Activity pour l'ecran de victoire d'un niveau
@@ -85,9 +84,25 @@ public class WinActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE) ; /* On ne souhaite pas afficher le nom de l'application en haut de l'ecran */
         setContentView(R.layout.activity_win); /* Setter sur le choix de la disposition des objets a l'ecran */
         logger.log(Level.INFO, "CreationWinActivty");
+        logger.log(Level.INFO, "Current Map : "+String.valueOf(currentMap) + ", Map Available : " + mapAvailable) ;
 
         musicWin = MediaPlayer.create(getApplicationContext(), R.raw.winningsong);
         musicWin.start();
+
+
+        if (mapAvailable == currentMap)
+        {
+            mapAvailable ++ ;
+            writeFile(this, "dress" + mapAvailable, 1);
+            logger.log(Level.INFO, "NewRewards");
+            try {
+                displayNewRewards();
+                writeFile(this, "map_available", mapAvailable);
+            } catch (InvalidCurrentDress invalidCurrentDress) {
+                logger.log(Level.SEVERE, "InvalidCurrentDress");
+            }
+        }
+
         buttonPreviousActivity = findViewById(R.id.buttonRetry);
         buttonPreviousActivity.setOnClickListener(new View.OnClickListener(){
             /**
@@ -114,31 +129,16 @@ public class WinActivity extends Activity {
                 logger.log(Level.INFO, "ChangeActivity");
                 Intent intent = new Intent(WinActivity.this, MapActivity.class);
                 resetMusic(musicWin);
-                startActivity(intent);
+                startActivity (intent);
             }
         });
         textViewVictory= findViewById(R.id.textVictory) ;
-        if (mapAvailable == currentMap)
-        {
-            logger.log(Level.INFO, "NewRewards");
-            try {
-                displayNewRewards();
-            } catch (InvalidCurrentDress invalidCurrentDress) {
-                logger.log(Level.SEVERE, "InvalidCurrentDress");
-            }
-        }
-
     }
 
     /**
      * Cette methode se declenche si on a debloque un nouveau niveau
      */
     private void displayNewRewards() throws InvalidCurrentDress {
-        mapAvailable ++ ;
-        SharedPreferences.Editor edit = getSharedPreferences("MapAvailable", Context.MODE_PRIVATE).edit(); /* On ouvre un fichier en mode ecriture pour mettre a jour le nombre de niveau debloque */
-        edit.putInt("map", mapAvailable) ;
-        edit.apply();
-
         imageViewNewDress = findViewById(R.id.imageNewDress) ;
         imageViewNewBadge = findViewById(R.id.imageNewBadge) ;
 

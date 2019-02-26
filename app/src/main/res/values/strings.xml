@@ -16,6 +16,19 @@
     <string name="new_badge">New badge unlocked</string>
     <string name="victory">VICTORY</string>
     <string name="new_rewards">New Rewards</string>
+    <string name="padlock">Unlocked Dress</string>
     <string name="alien_sprite">Alien Sprite</string>
+    <string name="price">""</string>
+    <string name="price1">Win first level</string>
+    <string name="price2">Win second level</string>
+    <string name="price3">Win third level</string>
+    <string name="price4">Win fourth level</string>
+    <string name="price5">Need 1 coin</string>
+    <string name="price6">Need 2 coins</string>
+    <string name="price7">Need 3 coins</string>
+    <string name="price8">Need 4 coins</string>
+    <string name="price9">Need 5 coins</string>
+    <string name="invalid_dress">You don\'t unlocked this dress ! Try an other</string>
+    <string name="coin_number">Number Of Coins</string>
 
 </resources>

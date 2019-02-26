@@ -29,7 +29,9 @@ import static com.example.dimitri.spacejump.StaticMethod.drawBitmap;
 import static com.example.dimitri.spacejump.StaticMethod.drawBitmapBackground;
 import static com.example.dimitri.spacejump.StaticMethod.drawBitmapReturn;
 import static com.example.dimitri.spacejump.StaticMethod.isButtonClick;
+import static com.example.dimitri.spacejump.StaticMethod.readFile;
 import static com.example.dimitri.spacejump.StaticMethod.resetMusic;
+import static com.example.dimitri.spacejump.StaticMethod.writeFile;
 
 class GameScene{
     /**
@@ -195,8 +197,9 @@ class GameScene{
                 win = true;
                 break;
 
-            case 2: // todo : coin
-
+            case -2: /* Piece */
+                int coin = readFile(context, "coin") ;
+                writeFile(context, "coin", coin + 1);
                 break;
         }
     }

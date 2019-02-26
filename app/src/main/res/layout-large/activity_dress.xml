@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:background = "@drawable/background"
     android:layout_width="match_parent"
@@ -63,4 +64,83 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imagePadlock"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/padlock"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageCurrentDress"
+        app:layout_constraintEnd_toEndOf="@+id/imageCurrentDress"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageCurrentDress"
+        app:layout_constraintTop_toTopOf="@+id/imageCurrentDress"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/cadenas" />
+
+    <TextView
+        android:id="@+id/textPriceDress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/price"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="75sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageCurrentDress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageCurrentDress" />
+
+    <ImageView
+        android:id="@+id/imageCoin"
+        android:layout_width="97dp"
+        android:layout_height="92dp"
+        android:contentDescription="@string/coin_number"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/coin" />
+
+    <TextView
+        android:id="@+id/textCoinNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="396dp"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="50sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageCoin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textLockedDress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/invalid_dress"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>

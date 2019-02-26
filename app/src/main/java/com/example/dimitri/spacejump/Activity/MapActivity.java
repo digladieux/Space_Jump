@@ -1,9 +1,7 @@
 package com.example.dimitri.spacejump.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +17,7 @@ import java.util.logging.Logger;
 
 import static com.example.dimitri.spacejump.Constants.ConstantsGame.currentMap;
 import static com.example.dimitri.spacejump.Constants.ConstantsGame.mapAvailable;
+import static com.example.dimitri.spacejump.StaticMethod.readFile;
 import static com.example.dimitri.spacejump.StaticMethod.resetMusic;
 
 /**
@@ -55,8 +54,7 @@ public class MapActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); /* On veut afficher l'application sur tout l'ecran */
         this.requestWindowFeature(Window.FEATURE_NO_TITLE); /* On ne souhaite pas afficher le nom de l'application en haut de l'ecran */
 
-        SharedPreferences fileMapAvailable = getSharedPreferences("MapAvailable", Context.MODE_PRIVATE); /* On ouvre la lecture d'un fichier qui sera ouvrable que par notre application */
-        mapAvailable = fileMapAvailable.getInt("map", 0); /* On recupere la valeur de cette cle. Ce sera 0 si la cle n'existe pas ( a la premiere installation de l'application a debloque 0 carte */
+        mapAvailable = readFile(this, "map_available") ;
 
         setContentView(R.layout.activity_map); /* Setter sur le choix de la disposition des objets a l'ecran */
         logger.log(Level.INFO, "CreationMapActivty");

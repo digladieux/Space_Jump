@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import static com.example.dimitri.spacejump.Constants.ConstantsGame.currentMap;
 import static com.example.dimitri.spacejump.Entities.Obstacles.BatObstacle.initialisationBatObstacle;
+import static com.example.dimitri.spacejump.Entities.Obstacles.Coin.initialisationCoin;
 import static com.example.dimitri.spacejump.Entities.Obstacles.GroundObstacle.initialisationGroundObstacle;
 import static com.example.dimitri.spacejump.Entities.Obstacles.SnakeObstacle.initialisationSnakeObstacle;
 
@@ -81,6 +82,7 @@ public final class Map {
             level.add(initialisationGroundObstacle(context,i));
             i++;
         }
+        level.add(initialisationCoin(context, 1)) ;
         level.add(new FlagArrival(context, 1.5)) ;
         return level;
     }

@@ -1,6 +1,7 @@
 package com.example.dimitri.spacejump;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -105,6 +106,10 @@ public class StaticMethod {
         return (event.getAction() == MotionEvent.ACTION_UP) && (event.getRawX() > 13 * Constants.SCREEN_WIDTH/14) && (event.getRawY() < Constants.SCREEN_WIDTH/14);
     }
 
+    /**
+     * Remise de la musique au debut
+     * @param music Musique a remettre au debut
+     */
     public static void resetMusic(MediaPlayer music)
     {
         music.stop();
@@ -115,6 +120,31 @@ public class StaticMethod {
             e.printStackTrace();
         }
         music.seekTo(0);
+    }
+
+    /**
+     * Lecture d'un fichier par cle - valeur
+     * @param context Activity actuellement en cours
+     * @param key Cle que l'on veut recuperer
+     * @return La valeur se trouvant a la cle
+     */
+    public static int readFile(Context context, String key)
+    {
+        SharedPreferences fileMapAvailable = context.getSharedPreferences("Constants", Context.MODE_PRIVATE); /* On ouvre la lecture d'un fichier qui sera ouvrable que par notre application */
+        return fileMapAvailable.getInt(key, 0); /* On recupere la valeur de cette cle. Ce sera 0 si la cle n'existe pas ( a la premiere installation de l'application a debloque 0 carte */
+    }
+
+    /**
+     * Ecriture d'un fichier par cle - valeur
+     * @param context Activity actuellement en cours
+     * @param key Cle que l'on veut recuperer
+     * @param value Valeur a inserer a la cle
+     */
+    public static void writeFile(Context context, String key, int value)
+    {
+        SharedPreferences.Editor edit = context.getSharedPreferences("Constants", Context.MODE_PRIVATE).edit(); /* On ouvre un fichier en mode ecriture pour mettre a jour le nombre de niveau debloque */
+        edit.putInt(key, value) ;
+        edit.apply();
     }
 
 

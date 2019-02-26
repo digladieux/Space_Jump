@@ -71,6 +71,7 @@ public class ObstacleManager {
                     collision = 1;
                     break;
                 } else if (codeCollision == -2) {
+                    obstacles.remove(ob) ;
                     collision = -2;
                     break;
                 }
@@ -89,9 +90,9 @@ public class ObstacleManager {
         {
             Obstacle ob = it.next();
             if (ob instanceof BatObstacle) { /* La vitesse des obstacles est differentes suivant si les personnages sont aerien ou terrien  */
-                ob.decrementX(Constants.SCREEN_WIDTH/60);
+                ob.decrementX(Constants.SCREEN_WIDTH/40);
             } else {
-                ob.decrementX(Constants.SCREEN_WIDTH/80);
+                ob.decrementX(Constants.SCREEN_WIDTH/60);
             }
             ob.update();
             if (ob.getRectangle().right <= 0) {
